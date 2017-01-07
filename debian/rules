@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --parallel --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-shared --enable-static --disable-silent-rules
+
+override_dh_auto_build-arch:
+	dh_auto_build --parallel
+	$(MAKE) -C doc documentation
